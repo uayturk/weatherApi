@@ -34,7 +34,6 @@ class FunctionalityHandlerImpl implements FunctionalityHandler {
 
   /*
    * EmZIJo7SS05EHTF2qiQa5aABmJqtG9gs 1.apikey(kullanıma acik)
-   * JfOrXahg4zjajliqHOtudyiG2UGqkdI1  2.apikey(sonra dene)
    * url : http://dataservice.accuweather.com/currentconditions/v1/topcities/50?apikey="+apiKey+"&language=en&details=true&format=json
    **/
   @Override
