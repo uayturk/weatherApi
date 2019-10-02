@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="css/owfont-regular.min.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/flag-icon.css" rel="stylesheet" type="text/css">
+    <link href="css/select2.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>WeatherApi</h1>
+
+<!--
+<div class="icon rainy" id="rainyWeather" style="visibility: hidden" ;>
+    <div class="cloud"></div>
+    <div class="rain"></div>
+</div>
+<div class="icon sunny" id="sunnyWeather" style="visibility: hidden" ;>
+    <div class="sun">
+        <div class="sun-corona">
+            <div class="item-group-1">
+                <span class="item-1">
+                    <span>
+                        <span></span>
+                    </span>
+                </span>
+                <span class="item-2"><span><span></span></span></span>
+                <span class="item-3"><span><span></span></span></span>
+                <span class="item-4"><span><span></span></span></span>
+            </div>
+            <div class="item-group-2">
+                <span class="item-1"><span><span></span></span></span>
+                <span class="item-2"><span><span></span></span></span>
+                <span class="item-3"><span><span></span></span></span>
+                <span class="item-4"><span><span></span></span></span>
+            </div>
+            <div class="item-group-3">
+                <span class="item-1"><span><span></span></span></span>
+                <span class="item-2"><span><span></span></span></span>
+                <span class="item-3"><span><span></span></span></span>
+                <span class="item-4"><span><span></span></span></span>
+            </div>
+            <div class="item-group-4">
+                <span class="item-1"><span><span></span></span></span>
+                <span class="item-2"><span><span></span></span></span>
+                <span class="item-3"><span><span></span></span></span>
+                <span class="item-4"><span><span></span></span></span>
+            </div>
+            <div class="item-group-5">
+                <span class="item-1"><span><span></span></span></span>
+                <span class="item-2"><span><span></span></span></span>
+                <span class="item-3"><span><span></span></span></span>
+                <span class="item-4"><span><span></span></span></span>
+            </div>
+            <div class="item-group-6">
+                <span class="item-1"><span><span></span></span></span>
+                <span class="item-2"><span><span></span></span></span>
+                <span class="item-3"><span><span></span></span></span>
+                <span class="item-4"><span><span></span></span></span>
+            </div>
+        </div>
+        <div class="sun-photosphere"></div>
+    </div>
+    &lt;!&ndash;<div class="rays"></div>&ndash;&gt;
+</div>
+<div class="icon cloudy" id="cloudyWeather" style="visibility: hidden" ;>
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+</div>
+<div class="icon flurries" id="snowWeather" style="visibility: hidden" ;>
+    <div class="cloud"></div>
+    <div class="snow">
+        <div class="flake"></div>
+        <div class="flake"></div>
+    </div>
+</div>
+<div class="icon thunder-storm" id="thunderStorm" style="visibility: hidden" ;>
+    <div class="cloud"></div>
+    <div class="lightning">
+        <div class="bolt"></div>
+        <div class="bolt"></div>
+    </div>
+</div>
+<div class="icon sun-cloudy" id="sunnyCloudy" style="visibility: hidden" ;>
+    <div class="cloud"></div>
+    &lt;!&ndash;  <div class="sun">
+        <div class="rays"></div>
+      </div>&ndash;&gt;
+    <div class="sun">
+        <div class="sun-corona">
+            <div class="item-group-1">
+                <span class="item-1"><span><span></span></span></span>
+                <span class="item-2"><span><span></span></span></span>
+                <span class="item-3"><span><span></span></span></span>
+                <span class="item-4"><span><span></span></span></span>
+            </div>
+            <div class="item-group-2">
+                <span class="item-1"><span><span></span></span></span>
+                <span class="item-2"><span><span></span></span></span>
+                <span class="item-3"><span><span></span></span></span>
+                <span class="item-4"><span><span></span></span></span>
+            </div>
+            <div class="item-group-3">
+                <span class="item-1"><span><span></span></span></span>
+                <span class="item-2"><span><span></span></span></span>
+                <span class="item-3"><span><span></span></span></span>
+                <span class="item-4"><span><span></span></span></span>
+            </div>
+            <div class="item-group-4">
+                <span class="item-1"><span><span></span></span></span>
+                <span class="item-2"><span><span></span></span></span>
+                <span class="item-3"><span><span></span></span></span>
+                <span class="item-4"><span><span></span></span></span>
+            </div>
+            <div class="item-group-5">
+                <span class="item-1"><span><span></span></span></span>
+                <span class="item-2"><span><span></span></span></span>
+                <span class="item-3"><span><span></span></span></span>
+                <span class="item-4"><span><span></span></span></span>
+            </div>
+            <div class="item-group-6">
+                <span class="item-1"><span><span></span></span></span>
+                <span class="item-2"><span><span></span></span></span>
+                <span class="item-3"><span><span></span></span></span>
+                <span class="item-4"><span><span></span></span></span>
+            </div>
+        </div>
+        <div class="sun-photosphere"></div>
+    </div>
+
+</div>
+-->
+
+<ul>
+    <script>
+        sayac = 0
+
+        function createDynamicallyWeatherIcon(id,englishName,thisIsCurrent,thisIsChosen) {
+
+            if (id === "rainyWeather") {
+                if(englishName === "London / United Kingdom" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctRain = document.getElementsByClassName('mainDivRainyWeatherLondon')[0];
+                }else if(englishName === "Istanbul / Turkey" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctRain = document.getElementsByClassName('mainDivRainyWeatherIstanbul')[0];
+                }else if(englishName === "Moscow / Russia" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctRain = document.getElementsByClassName('mainDivRainyWeatherMoscow')[0];
+                }else if(englishName === "New York / United States" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctRain = document.getElementsByClassName('mainDivRainyWeatherNewYork')[0];
+                }else if(thisIsCurrent===1){
+                    ctRain = document.getElementsByClassName('mainDivRainyWeatherCurrent')[0];
+                }else if(thisIsChosen===1){
+                    ctRain = document.getElementsByClassName('mainDivRainyWeatherChosen')[(document.getElementsByName('summaryChosenValues').length-1)];
+                }
+
+                while (ctRain.hasChildNodes()) {
+                    ctRain.removeChild(ctRain.lastChild);
+                }
+
+                var divTagRain1 = document.createElement('div');
+                divTagRain1.className = 'cloud';
+                ctRain.appendChild(divTagRain1);
+
+                var divTagRain2 = document.createElement('div');
+                divTagRain2.className = 'rain';
+                ctRain.appendChild(divTagRain2);
+
+                return ctRain;
+            }
+            // http://jsfiddle.net/uayturk/54Lc1sfv/2/   --->alt alta divleri dynamic create eden yapının fiddle'ı
+            else if (id === "sunnyWeather") {   //burada yukardaki yapıyı aynen oluşturmalısın. Div içinde div ,sonra span vs. burada o yapı kurulmalı appendChild'lar ile
+                /*var ctSunny = document.getElementById('mainDivSunnyWeather');*/
+
+                if(englishName === "London / United Kingdom" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctSunny = document.getElementsByClassName('mainDivSunnyWeatherLondon')[0];
+                }else if(englishName === "Istanbul / Turkey" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctSunny = document.getElementsByClassName('mainDivSunnyWeatherIstanbul')[0];
+                }else if(englishName === "Moscow / Russia" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctSunny = document.getElementsByClassName('mainDivSunnyWeatherMoscow')[0];
+                }else if(englishName === "New York / United States" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctSunny = document.getElementsByClassName('mainDivSunnyWeatherNewYork')[0];
+                }else if(thisIsCurrent===1){
+                    ctSunny = document.getElementsByClassName('mainDivSunnyWeatherCurrent')[0];
+                }else if(thisIsChosen===1){
+                    ctSunny = document.getElementsByClassName('mainDivSunnyWeatherChosen')[(document.getElementsByName('summaryChosenValues').length-1)];
+                }
+
+                while (ctSunny.hasChildNodes()) {
+
+                    ctSunny.removeChild(ctSunny.lastChild);
+                }
+
+                //adding single div which has as a class name "sun" inside mainDiv.
+                var divTagSunny1 = document.createElement('div');
+                divTagSunny1.className = 'sun';
+                ctSunny.appendChild(divTagSunny1);
+
+
+                // !!! Added 1st div tag inside "sun" div !!!
+                var divTagSunnyAlt1 = document.createElement('div');
+                divTagSunnyAlt1.className = 'sun-corona';
+                divTagSunny1.appendChild(divTagSunnyAlt1);
+
+
+                // ***********Now we are adding 6 div tag inside "sun-corona" div. *****************
+
+
+
+                var divTagSunCorona1 = document.createElement('div');
+                divTagSunCorona1.className = 'item-group-1';
+                divTagSunnyAlt1.appendChild(divTagSunCorona1);
+                // --------Spans for item-group-1 --------------------------------------------------
+                var divTagSunCorona1Span1 = document.createElement('span');
+                divTagSunCorona1Span1.className = 'item-1';
+                divTagSunCorona1.appendChild(divTagSunCorona1Span1);
+                        // --------Empty spans for item-1 ------------------------------------------
+                        var divTagSunCorona1Span1EmptySpan1 = document.createElement('span');
+                        divTagSunCorona1Span1.appendChild(divTagSunCorona1Span1EmptySpan1);
+
+                        var divTagSunCorona1Span1EmptySpan2 = document.createElement('span');
+                        divTagSunCorona1Span1EmptySpan1.appendChild(divTagSunCorona1Span1EmptySpan2);
+                        // --------End of the empty spans for item-1 -------------------------------
+
+                var divTagSunCorona1Span2 = document.createElement('span');
+                divTagSunCorona1Span2.className = 'item-2';
+                divTagSunCorona1.appendChild(divTagSunCorona1Span2);
+                        // --------Empty spans for item-2 ------------------------------------------
+                        var divTagSunCorona1Span2EmptySpan1 = document.createElement('span');
+                         divTagSunCorona1Span2.appendChild(divTagSunCorona1Span2EmptySpan1);
+
+                        var divTagSunCorona1Span2EmptySpan2 = document.createElement('span');
+                        divTagSunCorona1Span2EmptySpan1.appendChild(divTagSunCorona1Span2EmptySpan2);
+                        // --------End of the empty spans for item-2 -------------------------------
+
+                var divTagSunCorona1Span3 = document.createElement('span');
+                divTagSunCorona1Span3.className = 'item-3';
+                divTagSunCorona1.appendChild(divTagSunCorona1Span3);
+                        // --------Empty spans for item-3 ------------------------------------------
+                        var divTagSunCorona1Span3EmptySpan1 = document.createElement('span');
+                        divTagSunCorona1Span3.appendChild(divTagSunCorona1Span3EmptySpan1);
+
+                        var divTagSunCorona1Span3EmptySpan2 = document.createElement('span');
+                        divTagSunCorona1Span3EmptySpan1.appendChild(divTagSunCorona1Span3EmptySpan2);
+                        // --------End of the empty spans for item-3 -------------------------------
+
+                var divTagSunCorona1Span4 = document.createElement('span');
+                divTagSunCorona1Span4.className = 'item-4';
+                divTagSunCorona1.appendChild(divTagSunCorona1Span4);
+                        // --------Empty spans for item-4 ------------------------------------------
+                        var divTagSunCorona1Span4EmptySpan1 = document.createElement('span');
+                        divTagSunCorona1Span4.appendChild(divTagSunCorona1Span4EmptySpan1);
+
+                        var divTagSunCorona1Span4EmptySpan2 = document.createElement('span');
+                         divTagSunCorona1Span4EmptySpan1.appendChild(divTagSunCorona1Span4EmptySpan2);
+                        // --------End of the empty spans for item-4 -------------------------------
+                // --------End of the spans for item-group-1 ---------------------------------------
+
+
+
+                var divTagSunCorona2 = document.createElement('div');
+                divTagSunCorona2.className = 'item-group-2';
+                divTagSunnyAlt1.appendChild(divTagSunCorona2);
+                // --------Spans for item-group-2 --------------------------------------------------
+                var divTagSunCorona2Span1 = document.createElement('span');
+                divTagSunCorona2Span1.className = 'item-1';
+                divTagSunCorona2.appendChild(divTagSunCorona2Span1);
+                        // --------Empty spans for item-1 ------------------------------------------
+                        var divTagSunCorona2Span1EmptySpan1 = document.createElement('span');
+                        divTagSunCorona2Span1.appendChild(divTagSunCorona2Span1EmptySpan1);
+
+                        var divTagSunCorona2Span1EmptySpan2 = document.createElement('span');
+                        divTagSunCorona2Span1EmptySpan1.appendChild(divTagSunCorona2Span1EmptySpan2);
+                        // --------End of the empty spans for item-1 -------------------------------
+
+                var divTagSunCorona2Span2 = document.createElement('span');
+                divTagSunCorona2Span2.className = 'item-2';
+                divTagSunCorona2.appendChild(divTagSunCorona2Span2);
+                        // --------Empty spans for item-2 ------------------------------------------
+                        var divTagSunCorona2Span2EmptySpan1 = document.createElement('span');
+                         divTagSunCorona2Span2.appendChild(divTagSunCorona2Span2EmptySpan1);
+
+                        var divTagSunCorona2Span2EmptySpan2 = document.createElement('span');
+                        divTagSunCorona2Span2EmptySpan1.appendChild(divTagSunCorona2Span2EmptySpan2);
+                        // --------End of the empty spans for item-2 -------------------------------
+
+                var divTagSunCorona2Span3 = document.createElement('span');
+                divTagSunCorona2Span3.className = 'item-3';
+                divTagSunCorona2.appendChild(divTagSunCorona2Span3);
+                        // --------Empty spans for item-3 ------------------------------------------
+                        var divTagSunCorona2Span3EmptySpan1 = document.createElement('span');
+                        divTagSunCorona2Span3.appendChild(divTagSunCorona2Span3EmptySpan1);
+
+                        var divTagSunCorona2Span3EmptySpan2 = document.createElement('span');
+                        divTagSunCorona2Span3EmptySpan1.appendChild(divTagSunCorona2Span3EmptySpan2);
+                        // --------End of the empty spans for item-3 -------------------------------
+
+                var divTagSunCorona2Span4 = document.createElement('span');
+                divTagSunCorona2Span4.className = 'item-4';
+                divTagSunCorona2.appendChild(divTagSunCorona2Span4);
+                        // --------Empty spans for item-4 ------------------------------------------
+                        var divTagSunCorona2Span4EmptySpan1 = document.createElement('span');
+                        divTagSunCorona2Span4.appendChild(divTagSunCorona2Span4EmptySpan1);
+
+                        var divTagSunCorona2Span4EmptySpan2 = document.createElement('span');
+                        divTagSunCorona2Span4EmptySpan1.appendChild(divTagSunCorona2Span4EmptySpan2);
+                        // --------End of the empty spans for item-4 -------------------------------
+                // --------End of the spans for item-group-2 ---------------------------------------
+
+
+
+                var divTagSunCorona3 = document.createElement('div');
+                divTagSunCorona3.className = 'item-group-3';
+                divTagSunnyAlt1.appendChild(divTagSunCorona3);
+                // --------Spans for item-group-3 --------------------------------------------------
+                var divTagSunCorona3Span1 = document.createElement('span');
+                divTagSunCorona3Span1.className = 'item-1';
+                divTagSunCorona3.appendChild(divTagSunCorona3Span1);
+                        // --------Empty spans for item-1 ------------------------------------------
+                        var divTagSunCorona3Span1EmptySpan1 = document.createElement('span');
+                        divTagSunCorona3Span1.appendChild(divTagSunCorona3Span1EmptySpan1);
+
+                        var divTagSunCorona3Span1EmptySpan2 = document.createElement('span');
+                        divTagSunCorona3Span1EmptySpan1.appendChild(divTagSunCorona3Span1EmptySpan2);
+                        // --------End of the empty spans for item-1 -------------------------------
+
+                var divTagSunCorona3Span2 = document.createElement('span');
+                divTagSunCorona3Span2.className = 'item-2';
+                divTagSunCorona3.appendChild(divTagSunCorona3Span2);
+                        // --------Empty spans for item-2 ------------------------------------------
+                        var divTagSunCorona3Span2EmptySpan1 = document.createElement('span');
+                        divTagSunCorona3Span2.appendChild(divTagSunCorona3Span2EmptySpan1);
+
+                        var divTagSunCorona3Span2EmptySpan2 = document.createElement('span');
+                        divTagSunCorona3Span2EmptySpan1.appendChild(divTagSunCorona3Span2EmptySpan2);
+                        // --------End of the empty spans for item-2 -------------------------------
+
+                var divTagSunCorona3Span3 = document.createElement('span');
+                divTagSunCorona3Span3.className = 'item-3';
+                divTagSunCorona3.appendChild(divTagSunCorona3Span3);
+                        // --------Empty spans for item-3 ------------------------------------------
+                        var divTagSunCorona3Span3EmptySpan1 = document.createElement('span');
+                        divTagSunCorona3Span3.appendChild(divTagSunCorona3Span3EmptySpan1);
+
+                        var divTagSunCorona3Span3EmptySpan2 = document.createElement('span');
+                        divTagSunCorona3Span3EmptySpan1.appendChild(divTagSunCorona3Span3EmptySpan2);
+                        // --------End of the empty spans for item-3 -------------------------------
+
+                var divTagSunCorona3Span4 = document.createElement('span');
+                divTagSunCorona3Span4.className = 'item-4';
+                divTagSunCorona3.appendChild(divTagSunCorona3Span4);
+                        // --------Empty spans for item-4 ------------------------------------------
+                        var divTagSunCorona3Span4EmptySpan1 = document.createElement('span');
+                        divTagSunCorona3Span4.appendChild(divTagSunCorona3Span4EmptySpan1);
+
+                        var divTagSunCorona3Span4EmptySpan2 = document.createElement('span');
+                        divTagSunCorona3Span4EmptySpan1.appendChild(divTagSunCorona3Span4EmptySpan2);
+                        // --------End of the empty spans for item-4 -------------------------------
+                // --------End of the spans for item-group-3 ---------------------------------------
+
+
+
+                var divTagSunCorona4 = document.createElement('div');
+                divTagSunCorona4.className = 'item-group-4';
+                divTagSunnyAlt1.appendChild(divTagSunCorona4);
+                // --------Spans for item-group-4 --------------------------------------------------
+                var divTagSunCorona4Span1 = document.createElement('span');
+                divTagSunCorona4Span1.className = 'item-1';
+                divTagSunCorona4.appendChild(divTagSunCorona4Span1);
+                        // --------Empty spans for item-1 ------------------------------------------
+                        var divTagSunCorona4Span1EmptySpan1 = document.createElement('span');
+                        divTagSunCorona4Span1.appendChild(divTagSunCorona4Span1EmptySpan1);
+
+                        var divTagSunCorona4Span1EmptySpan2 = document.createElement('span');
+                        divTagSunCorona4Span1EmptySpan1.appendChild(divTagSunCorona4Span1EmptySpan2);
+                        // --------End of the empty spans for item-1 -------------------------------
+
+                var divTagSunCorona4Span2 = document.createElement('span');
+                divTagSunCorona4Span2.className = 'item-2';
+                divTagSunCorona4.appendChild(divTagSunCorona4Span2);
+                        // --------Empty spans for item-2 ------------------------------------------
+                        var divTagSunCorona4Span2EmptySpan1 = document.createElement('span');
+                        divTagSunCorona4Span2.appendChild(divTagSunCorona4Span2EmptySpan1);
+
+                        var divTagSunCorona4Span2EmptySpan2 = document.createElement('span');
+                        divTagSunCorona4Span2EmptySpan1.appendChild(divTagSunCorona4Span2EmptySpan2);
+                        // --------End of the empty spans for item-2 -------------------------------
+
+                var divTagSunCorona4Span3 = document.createElement('span');
+                divTagSunCorona4Span3.className = 'item-3';
+                divTagSunCorona4.appendChild(divTagSunCorona4Span3);
+                        // --------Empty spans for item-3 ------------------------------------------
+                        var divTagSunCorona4Span3EmptySpan1 = document.createElement('span');
+                        divTagSunCorona4Span3.appendChild(divTagSunCorona4Span3EmptySpan1);
+
+                        var divTagSunCorona4Span3EmptySpan2 = document.createElement('span');
+                        divTagSunCorona4Span3EmptySpan1.appendChild(divTagSunCorona4Span3EmptySpan2);
+                        // --------End of the empty spans for item-3 -------------------------------
+
+                var divTagSunCorona4Span4 = document.createElement('span');
+                divTagSunCorona4Span4.className = 'item-4';
+                divTagSunCorona4.appendChild(divTagSunCorona4Span4);
+                        // --------Empty spans for item-4 ------------------------------------------
+                        var divTagSunCorona4Span4EmptySpan1 = document.createElement('span');
+                        divTagSunCorona4Span4.appendChild(divTagSunCorona4Span4EmptySpan1);
+
+                        var divTagSunCorona4Span4EmptySpan2 = document.createElement('span');
+                        divTagSunCorona4Span4EmptySpan1.appendChild(divTagSunCorona4Span4EmptySpan2);
+                        // --------End of the empty spans for item-4 -------------------------------
+                // --------End of the spans for item-group-4 ---------------------------------------
+
+
+                var divTagSunCorona5 = document.createElement('div');
+                divTagSunCorona5.className = 'item-group-5';
+                divTagSunnyAlt1.appendChild(divTagSunCorona5);
+                // --------Spans for item-group-5 --------------------------------------------------
+                var divTagSunCorona5Span1 = document.createElement('span');
+                divTagSunCorona5Span1.className = 'item-1';
+                divTagSunCorona5.appendChild(divTagSunCorona5Span1);
+                        // --------Empty spans for item-1 ------------------------------------------
+                        var divTagSunCorona5Span1EmptySpan1 = document.createElement('span');
+                        divTagSunCorona5Span1.appendChild(divTagSunCorona5Span1EmptySpan1);
+
+                        var divTagSunCorona5Span1EmptySpan2 = document.createElement('span');
+                        divTagSunCorona5Span1EmptySpan1.appendChild(divTagSunCorona5Span1EmptySpan2);
+                        // --------End of the empty spans for item-1 -------------------------------
+
+                var divTagSunCorona5Span2 = document.createElement('span');
+                divTagSunCorona5Span2.className = 'item-2';
+                divTagSunCorona5.appendChild(divTagSunCorona5Span2);
+                        // --------Empty spans for item-2 ------------------------------------------
+                        var divTagSunCorona5Span2EmptySpan1 = document.createElement('span');
+                        divTagSunCorona5Span2.appendChild(divTagSunCorona5Span2EmptySpan1);
+
+                        var divTagSunCorona5Span2EmptySpan2 = document.createElement('span');
+                        divTagSunCorona5Span2EmptySpan1.appendChild(divTagSunCorona5Span2EmptySpan2);
+                        // --------End of the empty spans for item-2 -------------------------------
+
+                var divTagSunCorona5Span3 = document.createElement('span');
+                divTagSunCorona5Span3.className = 'item-3';
+                divTagSunCorona5.appendChild(divTagSunCorona5Span3);
+                        // --------Empty spans for item-3 ------------------------------------------
+                        var divTagSunCorona5Span3EmptySpan1 = document.createElement('span');
+                        divTagSunCorona5Span3.appendChild(divTagSunCorona5Span3EmptySpan1);
+
+                        var divTagSunCorona5Span3EmptySpan2 = document.createElement('span');
+                        divTagSunCorona5Span3EmptySpan1.appendChild(divTagSunCorona5Span3EmptySpan2);
+                        // --------End of the empty spans for item-3 -------------------------------
+
+                var divTagSunCorona5Span4 = document.createElement('span');
+                divTagSunCorona5Span4.className = 'item-4';
+                divTagSunCorona5.appendChild(divTagSunCorona5Span4);
+                        // --------Empty spans for item-4 ------------------------------------------
+                        var divTagSunCorona5Span4EmptySpan1 = document.createElement('span');
+                        divTagSunCorona5Span4.appendChild(divTagSunCorona5Span4EmptySpan1);
+
+                        var divTagSunCorona5Span4EmptySpan2 = document.createElement('span');
+                        divTagSunCorona5Span4EmptySpan1.appendChild(divTagSunCorona5Span4EmptySpan2);
+                        // --------End of the empty spans for item-4 -------------------------------
+                // --------End of the spans for item-group-5 ---------------------------------------
+
+
+
+                var divTagSunCorona6 = document.createElement('div');
+                divTagSunCorona6.className = 'item-group-6';
+                divTagSunnyAlt1.appendChild(divTagSunCorona6);
+                // --------Spans for item-group-6 --------------------------------------------------
+                var divTagSunCorona6Span1 = document.createElement('span');
+                divTagSunCorona6Span1.className = 'item-1';
+                divTagSunCorona6.appendChild(divTagSunCorona6Span1);
+                        // --------Empty spans for item-1 ------------------------------------------
+                        var divTagSunCorona6Span1EmptySpan1 = document.createElement('span');
+                        divTagSunCorona6Span1.appendChild(divTagSunCorona6Span1EmptySpan1);
+
+                        var divTagSunCorona6Span1EmptySpan2 = document.createElement('span');
+                        divTagSunCorona6Span1EmptySpan1.appendChild(divTagSunCorona6Span1EmptySpan2);
+                        // --------End of the empty spans for item-1 -------------------------------
+
+                var divTagSunCorona6Span2 = document.createElement('span');
+                divTagSunCorona6Span2.className = 'item-2';
+                divTagSunCorona6.appendChild(divTagSunCorona6Span2);
+                        // --------Empty spans for item-2 ------------------------------------------
+                        var divTagSunCorona6Span2EmptySpan1 = document.createElement('span');
+                        divTagSunCorona6Span2.appendChild(divTagSunCorona6Span2EmptySpan1);
+
+                        var divTagSunCorona6Span2EmptySpan2 = document.createElement('span');
+                        divTagSunCorona6Span2EmptySpan1.appendChild(divTagSunCorona6Span2EmptySpan2);
+                        // --------End of the empty spans for item-2 -------------------------------
+
+                var divTagSunCorona6Span3 = document.createElement('span');
+                divTagSunCorona6Span3.className = 'item-3';
+                divTagSunCorona6.appendChild(divTagSunCorona6Span3);
+                        // --------Empty spans for item-3 ------------------------------------------
+                        var divTagSunCorona6Span3EmptySpan1 = document.createElement('span');
+                        divTagSunCorona6Span3.appendChild(divTagSunCorona6Span3EmptySpan1);
+
+                        var divTagSunCorona6Span3EmptySpan2 = document.createElement('span');
+                        divTagSunCorona6Span3EmptySpan1.appendChild(divTagSunCorona6Span3EmptySpan2);
+                        // --------End of the empty spans for item-3 -------------------------------
+
+                var divTagSunCorona6Span4 = document.createElement('span');
+                divTagSunCorona6Span4.className = 'item-4';
+                divTagSunCorona6.appendChild(divTagSunCorona6Span4);
+                        // --------Empty spans for item-4 ------------------------------------------
+                        var divTagSunCorona6Span4EmptySpan1 = document.createElement('span');
+                        divTagSunCorona6Span4.appendChild(divTagSunCorona6Span4EmptySpan1);
+
+                        var divTagSunCorona6Span4EmptySpan2 = document.createElement('span');
+                        divTagSunCorona6Span4EmptySpan1.appendChild(divTagSunCorona6Span4EmptySpan2);
+                        // --------End of the empty spans for item-4 -------------------------------
+                // --------End of the spans for item-group-6 ---------------------------------------
+
+                // ***********End of adding 6 div tag inside "sun-corona" div. *********************
+
+
+                // !!! Added 2nd div tag inside "sun" div !!!
+                var divTagSunnyAlt2 = document.createElement('div');
+                divTagSunnyAlt2.className = 'sun-photosphere';
+                divTagSunny1.appendChild(divTagSunnyAlt2);
+
+                return ctSunny;
+            }
+            else if (id === "cloudyWeather") {
+                //var ctCloudyWeather = document.getElementById('mainDivCloudyWeather');
+
+                if(englishName === "London / United Kingdom" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctCloudyWeather = document.getElementsByClassName('mainDivCloudyWeatherLondon')[0];
+                }else if(englishName === "Istanbul / Turkey" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctCloudyWeather = document.getElementsByClassName('mainDivCloudyWeatherIstanbul')[0];
+                }else if(englishName === "Moscow / Russia" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctCloudyWeather = document.getElementsByClassName('mainDivCloudyWeatherMoscow')[0];
+                }else if(englishName === "New York / United States" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctCloudyWeather = document.getElementsByClassName('mainDivCloudyWeatherNewYork')[0];
+                }else if(thisIsCurrent===1){
+                    ctCloudyWeather = document.getElementsByClassName('mainDivCloudyWeatherCurrent')[0];
+                }else if(thisIsChosen===1){
+                    ctCloudyWeather = document.getElementsByClassName('mainDivCloudyWeatherChosen')[(document.getElementsByName('summaryChosenValues').length-1)];
+                }
+
+                while (ctCloudyWeather.hasChildNodes()) {
+                    ctCloudyWeather.removeChild(ctCloudyWeather.lastChild);
+                }
+
+
+                var divTagCloudy1 = document.createElement('div');
+                divTagCloudy1.className = 'cloud';
+                ctCloudyWeather.appendChild(divTagCloudy1);
+
+                var divTagCloudy2 = document.createElement('div');
+                divTagCloudy2.className = 'cloud';
+                ctCloudyWeather.appendChild(divTagCloudy2);
+
+                return ctCloudyWeather;
+            }
+            else if (id === "snowWeather") {
+                if(englishName === "London / United Kingdom" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctSnowWeather = document.getElementsByClassName('mainDivSnowWeatherLondon')[0];
+                }else if(englishName === "Istanbul / Turkey" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctSnowWeather = document.getElementsByClassName('mainDivSnowWeatherIstanbul')[0];
+                }else if(englishName === "Moscow / Russia" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctSnowWeather = document.getElementsByClassName('mainDivSnowWeatherMoscow')[0];
+                }else if(englishName === "New York / United States" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctSnowWeather = document.getElementsByClassName('mainDivSnowWeatherNewYork')[0];
+                }else if(thisIsCurrent===1){
+                    ctSnowWeather = document.getElementsByClassName('mainDivSnowWeatherCurrent')[0];
+                }else if(thisIsChosen===1){
+                    ctSnowWeather = document.getElementsByClassName('mainDivSnowWeatherChosen')[(document.getElementsByName('summaryChosenValues').length-1)];
+                }
+
+                while (ctSnowWeather.hasChildNodes()) {
+                    ctSnowWeather.removeChild(ctSnowWeather.lastChild);
+                }
+
+                var divTagSnow1 = document.createElement('div');
+                divTagSnow1.className = 'cloud';
+                ctSnowWeather.appendChild(divTagSnow1);
+
+                var divTagSnow2 = document.createElement('div');
+                divTagSnow2.className = 'snow';
+                ctSnowWeather.appendChild(divTagSnow2);
+
+                var divTagSnow3 = document.createElement('div');//this tag added inside divTagSnow2.
+                divTagSnow3.className = 'flake';
+                divTagSnow2.appendChild(divTagSnow3);
+
+
+                var divTagSnow4 = document.createElement('div');//this tag added inside divTagSnow2 too.
+                divTagSnow4.className = 'flake';
+                divTagSnow2.appendChild(divTagSnow4);
+
+                return ctSnowWeather;
+
+            }
+            else if (id === "thunderStorm") {
+                if(englishName === "London / United Kingdom" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctThunderStorm = document.getElementsByClassName('mainDivThunderStormLondon')[0];
+                }else if(englishName === "Istanbul / Turkey" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctThunderStorm = document.getElementsByClassName('mainDivThunderStormIstanbul')[0];
+                }else if(englishName === "Moscow / Russia" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctThunderStorm = document.getElementsByClassName('mainDivThunderStormMoscow')[0];
+                }else if(englishName === "New York / United States" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctThunderStorm = document.getElementsByClassName('mainDivThunderStormNewYork')[0];
+                }else if(thisIsCurrent===1){
+                    ctThunderStorm = document.getElementsByClassName('mainDivThunderStormCurrent')[0];
+                }else if(thisIsChosen===1){
+                    ctThunderStorm = document.getElementsByClassName('mainDivThunderStormChosen')[(document.getElementsByName('summaryChosenValues').length-1)];
+                }
+                while (ctThunderStorm.hasChildNodes()) {
+                    ctThunderStorm.removeChild(ctThunderStorm.lastChild);
+                }
+
+                var divTagThunderStorm1 = document.createElement('div');
+                divTagThunderStorm1.className = 'cloud';
+                ctThunderStorm.appendChild(divTagThunderStorm1);
+
+                var divTagThunderStorm2 = document.createElement('div');
+                divTagThunderStorm2.className = 'lightning';
+                ctThunderStorm.appendChild(divTagThunderStorm2);
+
+                var divTagThunderStorm3 = document.createElement('div');//this tag added inside divTagSnow2.
+                divTagThunderStorm3.className = 'bolt';
+                divTagThunderStorm2.appendChild(divTagThunderStorm3);
+
+
+                var divTagThunderStorm4 = document.createElement('div');//this tag added inside divTagSnow2 too.
+                divTagThunderStorm4.className = 'bolt';
+                divTagThunderStorm2.appendChild(divTagThunderStorm4);
+
+                return ctThunderStorm;
+
+            }
+            else if (id === "sunnyCloudy") {
+                if(englishName === "London / United Kingdom" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctSunnyCloudy = document.getElementsByClassName('mainDivSunnyCloudyLondon')[0];
+                }else if(englishName === "Istanbul / Turkey" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctSunnyCloudy = document.getElementsByClassName('mainDivSunnyCloudyIstanbul')[0];
+                }else if(englishName === "Moscow / Russia" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctSunnyCloudy = document.getElementsByClassName('mainDivSunnyCloudyMoscow')[0];
+                }else if(englishName === "New York / United States" && thisIsCurrent === 0 && thisIsChosen === 0){
+                    ctSunnyCloudy = document.getElementsByClassName('mainDivSunnyCloudyNewYork')[0];
+                }else if(thisIsCurrent===1){
+                    ctSunnyCloudy = document.getElementsByClassName('mainDivSunnyCloudyCurrent')[0];
+                }else if(thisIsChosen===1){
+                    ctSunnyCloudy = document.getElementsByClassName('mainDivSunnyCloudyChosen')[(document.getElementsByName('summaryChosenValues').length-1)];
+                }
+                while (ctSunnyCloudy.hasChildNodes()) {
+                    ctSunnyCloudy.removeChild(ctSunnyCloudy.lastChild);
+                }
+                var divSunnyCloudy1 = document.createElement('div');
+                divSunnyCloudy1.className = 'cloud';
+                ctSunnyCloudy.appendChild(divSunnyCloudy1);
+
+
+                //adding single div which has as a class name "sun" inside mainDiv.
+                var divTagSunny1Cloudy = document.createElement('div');
+                divTagSunny1Cloudy.className = 'sun';
+                ctSunnyCloudy.appendChild(divTagSunny1Cloudy);
+
+
+                // !!! Added 1st div tag inside "sun" div !!!
+                var divTagSunnyAlt1Cloudy = document.createElement('div');
+                divTagSunnyAlt1Cloudy.className = 'sun-corona';
+                divTagSunny1Cloudy.appendChild(divTagSunnyAlt1Cloudy);
+
+
+                // ***********Now we are adding 6 div tag inside "sun-corona" div. *****************
+
+
+
+                var divTagSunCorona1Cloudy = document.createElement('div');
+                divTagSunCorona1Cloudy.className = 'item-group-1';
+                divTagSunnyAlt1Cloudy.appendChild(divTagSunCorona1Cloudy);
+                // --------Spans for item-group-1 --------------------------------------------------
+                var divTagSunCorona1Span1Cloudy = document.createElement('span');
+                divTagSunCorona1Span1Cloudy.className = 'item-1';
+                divTagSunCorona1Cloudy.appendChild(divTagSunCorona1Span1Cloudy);
+                        // --------Empty spans for item-1 ------------------------------------------
+                        var divTagSunCorona1Span1EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona1Span1Cloudy.appendChild(divTagSunCorona1Span1EmptySpan1Cloudy);
+
+                        var divTagSunCorona1Span1EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona1Span1EmptySpan1Cloudy.appendChild(divTagSunCorona1Span1EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-1 -------------------------------
+
+                var divTagSunCorona1Span2Cloudy = document.createElement('span');
+                divTagSunCorona1Span2Cloudy.className = 'item-2';
+                divTagSunCorona1Cloudy.appendChild(divTagSunCorona1Span2Cloudy);
+                        // --------Empty spans for item-2 ------------------------------------------
+                        var divTagSunCorona1Span2EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona1Span2Cloudy.appendChild(divTagSunCorona1Span2EmptySpan1Cloudy);
+
+                        var divTagSunCorona1Span2EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona1Span2EmptySpan1Cloudy.appendChild(divTagSunCorona1Span2EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-2 -------------------------------
+
+                var divTagSunCorona1Span3Cloudy = document.createElement('span');
+                divTagSunCorona1Span3Cloudy.className = 'item-3';
+                divTagSunCorona1Cloudy.appendChild(divTagSunCorona1Span3Cloudy);
+                        // --------Empty spans for item-3 ------------------------------------------
+                        var divTagSunCorona1Span3EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona1Span3Cloudy.appendChild(divTagSunCorona1Span3EmptySpan1Cloudy);
+
+                        var divTagSunCorona1Span3EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona1Span3EmptySpan1Cloudy.appendChild(divTagSunCorona1Span3EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-3 -------------------------------
+
+                var divTagSunCorona1Span4Cloudy = document.createElement('span');
+                divTagSunCorona1Span4Cloudy.className = 'item-4';
+                divTagSunCorona1Cloudy.appendChild(divTagSunCorona1Span4Cloudy);
+                        // --------Empty spans for item-4 ------------------------------------------
+                        var divTagSunCorona1Span4EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona1Span4Cloudy.appendChild(divTagSunCorona1Span4EmptySpan1Cloudy);
+
+                        var divTagSunCorona1Span4EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona1Span4EmptySpan1Cloudy.appendChild(divTagSunCorona1Span4EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-4 -------------------------------
+                // --------End of the spans for item-group-1 ---------------------------------------
+
+
+
+                var divTagSunCorona2Cloudy = document.createElement('div');
+                divTagSunCorona2Cloudy.className = 'item-group-2';
+                divTagSunnyAlt1Cloudy.appendChild(divTagSunCorona2Cloudy);
+                // --------Spans for item-group-2 --------------------------------------------------
+                var divTagSunCorona2Span1Cloudy = document.createElement('span');
+                divTagSunCorona2Span1Cloudy.className = 'item-1';
+                divTagSunCorona2Cloudy.appendChild(divTagSunCorona2Span1Cloudy);
+                        // --------Empty spans for item-1 ------------------------------------------
+                        var divTagSunCorona2Span1EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona2Span1Cloudy.appendChild(divTagSunCorona2Span1EmptySpan1Cloudy);
+
+                        var divTagSunCorona2Span1EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona2Span1EmptySpan1Cloudy.appendChild(divTagSunCorona2Span1EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-1 -------------------------------
+
+                var divTagSunCorona2Span2Cloudy = document.createElement('span');
+                divTagSunCorona2Span2Cloudy.className = 'item-2';
+                divTagSunCorona2Cloudy.appendChild(divTagSunCorona2Span2Cloudy);
+                        // --------Empty spans for item-2 ------------------------------------------
+                        var divTagSunCorona2Span2EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona2Span2Cloudy.appendChild(divTagSunCorona2Span2EmptySpan1Cloudy);
+
+                        var divTagSunCorona2Span2EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona2Span2EmptySpan1Cloudy.appendChild(divTagSunCorona2Span2EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-2 -------------------------------
+
+                var divTagSunCorona2Span3Cloudy = document.createElement('span');
+                divTagSunCorona2Span3Cloudy.className = 'item-3';
+                divTagSunCorona2Cloudy.appendChild(divTagSunCorona2Span3Cloudy);
+                        // --------Empty spans for item-3 ------------------------------------------
+                        var divTagSunCorona2Span3EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona2Span3Cloudy.appendChild(divTagSunCorona2Span3EmptySpan1Cloudy);
+
+                        var divTagSunCorona2Span3EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona2Span3EmptySpan1Cloudy.appendChild(divTagSunCorona2Span3EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-3 -------------------------------
+
+                var divTagSunCorona2Span4Cloudy = document.createElement('span');
+                divTagSunCorona2Span4Cloudy.className = 'item-4';
+                divTagSunCorona2Cloudy.appendChild(divTagSunCorona2Span4Cloudy);
+                        // --------Empty spans for item-4 ------------------------------------------
+                        var divTagSunCorona2Span4EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona2Span4Cloudy.appendChild(divTagSunCorona2Span4EmptySpan1Cloudy);
+
+                        var divTagSunCorona2Span4EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona2Span4EmptySpan1Cloudy.appendChild(divTagSunCorona2Span4EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-4 -------------------------------
+                // --------End of the spans for item-group-2 ---------------------------------------
+
+
+
+                var divTagSunCorona3Cloudy = document.createElement('div');
+                divTagSunCorona3Cloudy.className = 'item-group-3';
+                divTagSunnyAlt1Cloudy.appendChild(divTagSunCorona3Cloudy);
+                // --------Spans for item-group-3 --------------------------------------------------
+                var divTagSunCorona3Span1Cloudy = document.createElement('span');
+                divTagSunCorona3Span1Cloudy.className = 'item-1';
+                divTagSunCorona3Cloudy.appendChild(divTagSunCorona3Span1Cloudy);
+                        // --------Empty spans for item-1 ------------------------------------------
+                        var divTagSunCorona3Span1EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona3Span1Cloudy.appendChild(divTagSunCorona3Span1EmptySpan1Cloudy);
+
+                        var divTagSunCorona3Span1EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona3Span1EmptySpan1Cloudy.appendChild(divTagSunCorona3Span1EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-1 -------------------------------
+
+                var divTagSunCorona3Span2Cloudy = document.createElement('span');
+                divTagSunCorona3Span2Cloudy.className = 'item-2';
+                divTagSunCorona3Cloudy.appendChild(divTagSunCorona3Span2Cloudy);
+                        // --------Empty spans for item-2 ------------------------------------------
+                        var divTagSunCorona3Span2EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona3Span2Cloudy.appendChild(divTagSunCorona3Span2EmptySpan1Cloudy);
+
+                        var divTagSunCorona3Span2EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona3Span2EmptySpan1Cloudy.appendChild(divTagSunCorona3Span2EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-2 -------------------------------
+
+                var divTagSunCorona3Span3Cloudy = document.createElement('span');
+                divTagSunCorona3Span3Cloudy.className = 'item-3';
+                divTagSunCorona3Cloudy.appendChild(divTagSunCorona3Span3Cloudy);
+                        // --------Empty spans for item-3 ------------------------------------------
+                        var divTagSunCorona3Span3EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona3Span3Cloudy.appendChild(divTagSunCorona3Span3EmptySpan1Cloudy);
+
+                        var divTagSunCorona3Span3EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona3Span3EmptySpan1Cloudy.appendChild(divTagSunCorona3Span3EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-3 -------------------------------
+
+                var divTagSunCorona3Span4Cloudy = document.createElement('span');
+                divTagSunCorona3Span4Cloudy.className = 'item-4';
+                divTagSunCorona3Cloudy.appendChild(divTagSunCorona3Span4Cloudy);
+                        // --------Empty spans for item-4 ------------------------------------------
+                        var divTagSunCorona3Span4EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona3Span4Cloudy.appendChild(divTagSunCorona3Span4EmptySpan1Cloudy);
+
+                        var divTagSunCorona3Span4EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona3Span4EmptySpan1Cloudy.appendChild(divTagSunCorona3Span4EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-4 -------------------------------
+                // --------End of the spans for item-group-3 ---------------------------------------
+
+
+
+                var divTagSunCorona4Cloudy = document.createElement('div');
+                divTagSunCorona4Cloudy.className = 'item-group-4';
+                divTagSunnyAlt1Cloudy.appendChild(divTagSunCorona4Cloudy);
+                // --------Spans for item-group-4 --------------------------------------------------
+                var divTagSunCorona4Span1Cloudy = document.createElement('span');
+                divTagSunCorona4Span1Cloudy.className = 'item-1';
+                divTagSunCorona4Cloudy.appendChild(divTagSunCorona4Span1Cloudy);
+                        // --------Empty spans for item-1 ------------------------------------------
+                        var divTagSunCorona4Span1EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona4Span1Cloudy.appendChild(divTagSunCorona4Span1EmptySpan1Cloudy);
+
+                        var divTagSunCorona4Span1EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona4Span1EmptySpan1Cloudy.appendChild(divTagSunCorona4Span1EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-1 -------------------------------
+
+                var divTagSunCorona4Span2Cloudy = document.createElement('span');
+                divTagSunCorona4Span2Cloudy.className = 'item-2';
+                divTagSunCorona4Cloudy.appendChild(divTagSunCorona4Span2Cloudy);
+                        // --------Empty spans for item-2 ------------------------------------------
+                        var divTagSunCorona4Span2EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona4Span2Cloudy.appendChild(divTagSunCorona4Span2EmptySpan1Cloudy);
+
+                        var divTagSunCorona4Span2EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona4Span2EmptySpan1Cloudy.appendChild(divTagSunCorona4Span2EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-2 -------------------------------
+
+                var divTagSunCorona4Span3Cloudy = document.createElement('span');
+                divTagSunCorona4Span3Cloudy.className = 'item-3';
+                divTagSunCorona4Cloudy.appendChild(divTagSunCorona4Span3Cloudy);
+                        // --------Empty spans for item-3 ------------------------------------------
+                        var divTagSunCorona4Span3EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona4Span3Cloudy.appendChild(divTagSunCorona4Span3EmptySpan1Cloudy);
+
+                        var divTagSunCorona4Span3EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona4Span3EmptySpan1Cloudy.appendChild(divTagSunCorona4Span3EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-3 -------------------------------
+
+                var divTagSunCorona4Span4Cloudy = document.createElement('span');
+                divTagSunCorona4Span4Cloudy.className = 'item-4';
+                divTagSunCorona4Cloudy.appendChild(divTagSunCorona4Span4Cloudy);
+                        // --------Empty spans for item-4 ------------------------------------------
+                        var divTagSunCorona4Span4EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona4Span4Cloudy.appendChild(divTagSunCorona4Span4EmptySpan1Cloudy);
+
+                        var divTagSunCorona4Span4EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona4Span4EmptySpan1Cloudy.appendChild(divTagSunCorona4Span4EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-4 -------------------------------
+                // --------End of the spans for item-group-4 ---------------------------------------
+
+
+                var divTagSunCorona5Cloudy = document.createElement('div');
+                divTagSunCorona5Cloudy.className = 'item-group-5';
+                divTagSunnyAlt1Cloudy.appendChild(divTagSunCorona5Cloudy);
+                // --------Spans for item-group-5 --------------------------------------------------
+                var divTagSunCorona5Span1Cloudy = document.createElement('span');
+                divTagSunCorona5Span1Cloudy.className = 'item-1';
+                divTagSunCorona5Cloudy.appendChild(divTagSunCorona5Span1Cloudy);
+                        // --------Empty spans for item-1 ------------------------------------------
+                        var divTagSunCorona5Span1EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona5Span1Cloudy.appendChild(divTagSunCorona5Span1EmptySpan1Cloudy);
+
+                        var divTagSunCorona5Span1EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona5Span1EmptySpan1Cloudy.appendChild(divTagSunCorona5Span1EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-1 -------------------------------
+
+                var divTagSunCorona5Span2Cloudy = document.createElement('span');
+                divTagSunCorona5Span2Cloudy.className = 'item-2';
+                divTagSunCorona5Cloudy.appendChild(divTagSunCorona5Span2Cloudy);
+                        // --------Empty spans for item-2 ------------------------------------------
+                        var divTagSunCorona5Span2EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona5Span2Cloudy.appendChild(divTagSunCorona5Span2EmptySpan1Cloudy);
+
+                        var divTagSunCorona5Span2EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona5Span2EmptySpan1Cloudy.appendChild(divTagSunCorona5Span2EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-2 -------------------------------
+
+                var divTagSunCorona5Span3Cloudy = document.createElement('span');
+                divTagSunCorona5Span3Cloudy.className = 'item-3';
+                divTagSunCorona5Cloudy.appendChild(divTagSunCorona5Span3Cloudy);
+                        // --------Empty spans for item-3 ------------------------------------------
+                        var divTagSunCorona5Span3EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona5Span3Cloudy.appendChild(divTagSunCorona5Span3EmptySpan1Cloudy);
+
+                        var divTagSunCorona5Span3EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona5Span3EmptySpan1Cloudy.appendChild(divTagSunCorona5Span3EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-3 -------------------------------
+
+                var divTagSunCorona5Span4Cloudy = document.createElement('span');
+                divTagSunCorona5Span4Cloudy.className = 'item-4';
+                divTagSunCorona5Cloudy.appendChild(divTagSunCorona5Span4Cloudy);
+                        // --------Empty spans for item-4 ------------------------------------------
+                        var divTagSunCorona5Span4EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona5Span4Cloudy.appendChild(divTagSunCorona5Span4EmptySpan1Cloudy);
+
+                        var divTagSunCorona5Span4EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona5Span4EmptySpan1Cloudy.appendChild(divTagSunCorona5Span4EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-4 -------------------------------
+                // --------End of the spans for item-group-5 ---------------------------------------
+
+
+
+                var divTagSunCorona6Cloudy = document.createElement('div');
+                divTagSunCorona6Cloudy.className = 'item-group-6';
+                divTagSunnyAlt1Cloudy.appendChild(divTagSunCorona6Cloudy);
+                // --------Spans for item-group-6 --------------------------------------------------
+                var divTagSunCorona6Span1Cloudy = document.createElement('span');
+                divTagSunCorona6Span1Cloudy.className = 'item-1';
+                divTagSunCorona6Cloudy.appendChild(divTagSunCorona6Span1Cloudy);
+                        // --------Empty spans for item-1 ------------------------------------------
+                        var divTagSunCorona6Span1EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona6Span1Cloudy.appendChild(divTagSunCorona6Span1EmptySpan1Cloudy);
+
+                        var divTagSunCorona6Span1EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona6Span1EmptySpan1Cloudy.appendChild(divTagSunCorona6Span1EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-1 -------------------------------
+
+                var divTagSunCorona6Span2Cloudy = document.createElement('span');
+                divTagSunCorona6Span2Cloudy.className = 'item-2';
+                divTagSunCorona6Cloudy.appendChild(divTagSunCorona6Span2Cloudy);
+                        // --------Empty spans for item-2 ------------------------------------------
+                        var divTagSunCorona6Span2EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona6Span2Cloudy.appendChild(divTagSunCorona6Span2EmptySpan1Cloudy);
+
+                        var divTagSunCorona6Span2EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona6Span2EmptySpan1Cloudy.appendChild(divTagSunCorona6Span2EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-2 -------------------------------
+
+                var divTagSunCorona6Span3Cloudy = document.createElement('span');
+                divTagSunCorona6Span3Cloudy.className = 'item-3';
+                divTagSunCorona6Cloudy.appendChild(divTagSunCorona6Span3Cloudy);
+                        // --------Empty spans for item-3 ------------------------------------------
+                        var divTagSunCorona6Span3EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona6Span3Cloudy.appendChild(divTagSunCorona6Span3EmptySpan1Cloudy);
+
+                        var divTagSunCorona6Span3EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona6Span3EmptySpan1Cloudy.appendChild(divTagSunCorona6Span3EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-3 -------------------------------
+
+                var divTagSunCorona6Span4Cloudy = document.createElement('span');
+                divTagSunCorona6Span4Cloudy.className = 'item-4';
+                divTagSunCorona6Cloudy.appendChild(divTagSunCorona6Span4Cloudy);
+                        // --------Empty spans for item-4 ------------------------------------------
+                        var divTagSunCorona6Span4EmptySpan1Cloudy = document.createElement('span');
+                        divTagSunCorona6Span4Cloudy.appendChild(divTagSunCorona6Span4EmptySpan1Cloudy);
+
+                        var divTagSunCorona6Span4EmptySpan2Cloudy = document.createElement('span');
+                        divTagSunCorona6Span4EmptySpan1Cloudy.appendChild(divTagSunCorona6Span4EmptySpan2Cloudy);
+                        // --------End of the empty spans for item-4 -------------------------------
+                // --------End of the spans for item-group-6 ---------------------------------------
+
+                // ***********End of adding 6 div tag inside "sun-corona" div. *********************
+
+
+                // !!! Added 2nd div tag inside "sun" div !!!
+                var divTagSunnyAlt2Cloudy = document.createElement('div');
+                divTagSunnyAlt2Cloudy.className = 'sun-photosphere';
+                divTagSunny1Cloudy.appendChild(divTagSunnyAlt2Cloudy);
+
+                return ctSunnyCloudy;
+
+            }
+
+
+        }
+
+        function weatherConditions(weatherText,englishName,thisIsCurrent,thisIsChosen) {
+
+            if (weatherText === "Cloudy" || weatherText === "Mostly cloudy" || weatherText === "Foggy" || weatherText === "Some clouds" || weatherText === "Lazy clouds" || weatherText === "Partly cloudy" || weatherText === "Overcast" || weatherText === "Haze") {
+                id = 'cloudyWeather';
+                className = 'icon cloudy';
+            } else if (weatherText === "Mostly sunny" || weatherText === "Mostly clear" || weatherText === "Partly sunny" || weatherText === "Sunny" || weatherText === "Clear") {
+                id = 'sunnyWeather';
+                className = 'icon sunny';
+            } else if (weatherText === "Clouds and sun") {
+                id = 'sunnyCloudy';
+                className = 'icon sun-cloudy';
+            } else if (weatherText === "Rain shower" || weatherText === "Shower" || weatherText === " A shower" || weatherText === "Rain" || weatherText === "Light rain" || weatherText === "Heavy rain") {
+                id = 'rainyWeather';
+                className = 'icon rainy';
+            } else if (weatherText === "Thunderstorm") {
+                id = 'thunderStorm';
+                className = 'icon thunder-storm';
+            } else if (weatherText === "Light snow") {
+                id = 'snowWeather';
+                className = 'icon flurries';
+
+            }
+            return createDynamicallyWeatherIcon(id,englishName,thisIsCurrent,thisIsChosen);
+
+        }
+    </script>
+
+    <!--https://codepen.io/raphael_octau/pen/zmWbxq     Çok güzel country search-->
+
+    <!--https://codepen.io/j0be/pen/jWGVvV  bu linkte combobox ve secileni bir yere atama varr-->
+    <!--https://jsfiddle.net/Ltkpshm9/  burda scrollu combobox var-->
+    <!--https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown_filter    search yapar comboboxta-->
+   <!--https://jsfiddle.net/6wtf0q4g/  double tırnakları kaldırma çalışma üzerinda-->
+   <!--    <span class="dropdown-el" id="myCombobox">
+             &lt;!&ndash;<input type="radio" placeholder="Search.." id="myInput" onkeyup="filterFunction()">&ndash;&gt;
+             <input type="radio" name="sortType" value="Relevance" checked="checked" id="sort-relevance"><label for="sort-relevance">Relevance</label>
+             <input type="radio" name="sortType" value="Popularity" id="sort-best"><label for="sort-best">Product Popularity</label>
+             <input type="radio" name="sortType" value="PriceIncreasing" id="sort-low"><label for="sort-low">Price Low to High</label>
+             <input type="radio" name="sortType" value="PriceDecreasing" id="sort-high"><label for="sort-high">Price High to Low</label>
+             <input type="radio" name="sortType" value="ProductBrand" id="sort-brand"><label for="sort-brand">Product Brand</label>
+             <input type="radio" name="sortType" value="ProductName" id="sort-name"><label for="sort-name">Product Name</label>
+             <input type="radio" name="sortType" value="PriceDecreasing" id="sort-tur"><label for="sort-tur">Turkey</label>
+             <input type="radio" name="sortType" value="ProductBrand" id="sort-rus"><label for="sort-rus">Russia</label>
+             <input type="radio" name="sortType" value="ProductName" id="sort-uk"><label for="sort-uk">UK</label>
+
+    </span>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+    <script>
+        if(typeof jQuery!=='undefined'){
+            console.log('jQuery Loaded');
+        }
+        else{
+            console.log('not loaded yet');
+        }
+        //This function for trigger to get the selected value.
+        $('.dropdown-el').click(function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $(this).toggleClass('expanded');
+            $('#'+$(e.target).attr('for')).prop('checked',true).trigger('change');
+
+        });
+        $(document).click(function() {
+            $('.dropdown-el').removeClass('expanded');
+        });
+        //This function for taking current location.
+        $.get("https://api.ipdata.co/?api-key=0083485ee882335a413ef89a99cb902453f142de3c96e21dd4b1e3b1", function (response) {
+            $("#response").html(JSON.stringify(response.country_name, null, 4));
+
+            //this ajax for send current country value to spring boot controller.
+            var currentCountryName = {
+                countryName : $("#response").html(JSON.stringify(response.country_name, null, 4))[0].innerText,
+            };
+
+            $.ajax({
+                type: "POST",
+                url: 'getCountryNameFromJquery',//do not put the full url,you need use an absolute url
+                data: currentCountryName,//put search js object directly here
+                success :function(result) {
+                    console.log("Successfuly sent data to the Spring Controller.")
+                }
+            });
+        }, "jsonp");
+
+    </script>-->
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+    <select name="country" id="selectCountryId"><option></option></select>
+    <script>
+        (function($) {
+            $(function() {
+                var isoCountries = [
+                    { id: 'AF', text: 'Afghanistan'},
+                    //{ id: 'AX', text: 'Aland Islands'},
+                    { id: 'AL', text: 'Albania'},
+                    { id: 'DZ', text: 'Algeria'},
+                    { id: 'AS', text: 'American Samoa'},
+                    //{ id: 'AD', text: 'Andorra'},
+                    { id: 'AO', text: 'Angola'},
+                    //{ id: 'AI', text: 'Anguilla'},
+                    //{ id: 'AQ', text: 'Antarctica'},
+                    { id: 'AG', text: 'Antigua and Barbuda'},
+                    { id: 'AR', text: 'Argentina'},
+                    { id: 'AM', text: 'Armenia'},
+                    //{ id: 'AW', text: 'Aruba'},
+                    { id: 'AU', text: 'Australia'},
+                    { id: 'AT', text: 'Austria'},
+                    //{ id: 'AZ', text: 'Azerbaijan'},
+                    //{ id: 'BS', text: 'Bahamas'},
+                    //{ id: 'BH', text: 'Bahrain'},
+                    { id: 'BD', text: 'Bangladesh'},
+                    //{ id: 'BB', text: 'Barbados'},
+                    { id: 'BY', text: 'Belarus'},
+                    { id: 'BE', text: 'Belgium'},
+                    //{ id: 'BZ', text: 'Belize'},
+                    //{ id: 'BJ', text: 'Benin'},
+                    //{ id: 'BM', text: 'Bermuda'},
+                    //{ id: 'BT', text: 'Bhutan'},
+                    { id: 'BO', text: 'Bolivia'},
+                    //{ id: 'BA', text: 'Bosnia And Herzegovina'},
+                    //{ id: 'BW', text: 'Botswana'},
+                    //{ id: 'BV', text: 'Bouvet Island'},
+                    { id: 'BR', text: 'Brazil'},
+                    //{ id: 'IO', text: 'British Indian Ocean Territory'},
+                    //{ id: 'BN', text: 'Brunei Darussalam'},
+                    { id: 'BG', text: 'Bulgaria'},
+                    //{ id: 'BF', text: 'Burkina Faso'},
+                    { id: 'BI', text: 'Burundi'},
+                    { id: 'KH', text: 'Cambodia'},
+                    //{ id: 'CM', text: 'Cameroon'},
+                    { id: 'CA', text: 'Canada'},
+                    //{ id: 'CV', text: 'Cape Verde'},
+                    //{ id: 'KY', text: 'Cayman Islands'},
+                    //{ id: 'CF', text: 'Central African Republic'},
+                    //{ id: 'TD', text: 'Chad'},
+                    { id: 'CL', text: 'Chile'},
+                    { id: 'CN', text: 'China'},
+                    //{ id: 'CX', text: 'Christmas Island'},
+                    //{ id: 'CC', text: 'Cocos (Keeling) Islands'},
+                    { id: 'CO', text: 'Colombia'},
+                    //{ id: 'KM', text: 'Comoros'},
+                    //{ id: 'CG', text: 'Congo'},
+                    //{ id: 'CK', text: 'Cook Islands'},
+                    { id: 'CR', text: 'Costa Rica'},
+                    { id: 'CI', text: 'Cote D\'Ivoire'},
+                    //{ id: 'HR', text: 'Croatia'},
+                    { id: 'CU', text: 'Cuba'},
+                    { id: 'CY', text: 'Cyprus'},
+                    { id: 'CZ', text: 'Czechia'},
+                    { id: 'DK', text: 'Denmark'},
+                    { id: 'CD', text: 'Democratic Republic of the Congo'},
+                    //{ id: 'DJ', text: 'Djibouti'},
+                    //{ id: 'DM', text: 'Dominica'},
+                    { id: 'DO', text: 'Dominican Republic'},
+                    { id: 'EC', text: 'Ecuador'},
+                    { id: 'EG', text: 'Egypt'},
+                    { id: 'SV', text: 'El Salvador'},
+                    //{ id: 'GQ', text: 'Equatorial Guinea'},
+                    //{ id: 'ER', text: 'Eritrea'},
+                    { id: 'EE', text: 'Estonia'},
+                    //{ id: 'ET', text: 'Ethiopia'},
+                    //{ id: 'FK', text: 'Falkland Islands (Malvinas)'},
+                    //{ id: 'FO', text: 'Faroe Islands'},
+                    //{ id: 'FJ', text: 'Fiji'},
+                    { id: 'FI', text: 'Finland'},
+                    { id: 'FR', text: 'France'},
+                    //{ id: 'GF', text: 'French Guiana'},
+                    //{ id: 'PF', text: 'French Polynesia'},
+                    //{ id: 'TF', text: 'French Southern Territories'},
+                    //{ id: 'GA', text: 'Gabon'},
+                    //{ id: 'GM', text: 'Gambia'},
+                    { id: 'GE', text: 'Georgia'},
+                    { id: 'DE', text: 'Germany'},
+                    //{ id: 'GH', text: 'Ghana'},
+                    { id: 'GI', text: 'Gibraltar'},
+                    { id: 'GR', text: 'Greece'},
+                    //{ id: 'GL', text: 'Greenland'},
+                    //{ id: 'GD', text: 'Grenada'},
+                    //{ id: 'GP', text: 'Guadeloupe'},
+                    //{ id: 'GU', text: 'Guam'},
+                    //{ id: 'GT', text: 'Guatemala'},
+                    //{ id: 'GG', text: 'Guernsey'},
+                    //{ id: 'GN', text: 'Papua New Guinea'},
+                    //{ id: 'GW', text: 'Guinea-Bissau'},
+                    //{ id: 'GY', text: 'Guyana'},
+                    { id: 'HT', text: 'Haiti'},
+                    //{ id: 'HM', text: 'Heard Island & Mcdonald Islands'},
+                    //{ id: 'VA', text: 'Holy See (Vatican City State)'},
+                    //{ id: 'HN', text: 'Honduras'},
+                    { id: 'HK', text: 'Hong Kong'},
+                    { id: 'HU', text: 'Hungary'},
+                    { id: 'IS', text: 'Iceland'},
+                    { id: 'IN', text: 'India'},
+                    { id: 'ID', text: 'Indonesia'},
+                    { id: 'IR', text: 'Iran'},
+                    { id: 'IQ', text: 'Iraq'},
+                    { id: 'IE', text: 'Ireland'},
+                    //{ id: 'IM', text: 'Isle Of Man'},
+                    { id: 'IL', text: 'Israel'},
+                    { id: 'IT', text: 'Italy'},
+                    { id: 'JM', text: 'Jamaica'},
+                    { id: 'JP', text: 'Japan'},
+                    //{ id: 'JE', text: 'Jersey'},
+                    //{ id: 'JO', text: 'Jordan'},
+                    { id: 'KZ', text: 'Kazakhstan'},
+                    { id: 'KE', text: 'Kenya'},
+                    //{ id: 'KI', text: 'Kiribati'},
+                    { id: 'KR', text: 'South Korea'},
+                    //{ id: 'KW', text: 'Kuwait'},
+                    //{ id: 'KG', text: 'Kyrgyzstan'},
+                    { id: 'LA', text: 'Laos'},
+                    { id: 'LV', text: 'Latvia'},
+                    //{ id: 'LB', text: 'Lebanon'},
+                    //{ id: 'LS', text: 'Lesotho'},
+                    //{ id: 'LR', text: 'Liberia'},
+                    { id: 'LY', text: 'Libya'},
+                    //{ id: 'LI', text: 'Liechtenstein'},
+                    { id: 'LT', text: 'Lithuania'},
+                    //{ id: 'LU', text: 'Luxembourg'},
+                    //{ id: 'MO', text: 'Macao'},
+                    //{ id: 'MK', text: 'Macedonia'},
+                    //{ id: 'MG', text: 'Madagascar'},
+                    //{ id: 'MW', text: 'Malawi'},
+                    { id: 'MY', text: 'Malaysia'},
+                    { id: 'MV', text: 'Maldives'},
+                    //{ id: 'ML', text: 'Mali'},
+                    //{ id: 'MT', text: 'Malta'},
+                    //{ id: 'MH', text: 'Marshall Islands'},
+                    //{ id: 'MQ', text: 'Martinique'},
+                    //{ id: 'MR', text: 'Mauritania'},
+                    //{ id: 'MU', text: 'Mauritius'},
+                    //{ id: 'YT', text: 'Mayotte'},
+                    { id: 'MX', text: 'Mexico'},
+                    //{ id: 'FM', text: 'Micronesia}, Federated States Of'},
+                    //{ id: 'MD', text: 'Moldova'},
+                    //{ id: 'MC', text: 'Monaco'},
+                    { id: 'MN', text: 'Mongolia'},
+                    //{ id: 'ME', text: 'Montenegro'},
+                    //{ id: 'MS', text: 'Montserrat'},
+                    { id: 'MA', text: 'Morocco'},
+                    //{ id: 'MZ', text: 'Mozambique'},
+                    { id: 'MM', text: 'Myanmar'},
+                    //{ id: 'NA', text: 'Namibia'},
+                    //{ id: 'NR', text: 'Nauru'},
+                    { id: 'NP', text: 'Nepal'},
+                    { id: 'NL', text: 'Netherlands'},
+                    //{ id: 'AN', text: 'Netherlands Antilles'},
+                    //{ id: 'NC', text: 'New Caledonia'},
+                    { id: 'NZ', text: 'New Zealand'},
+                    //{ id: 'NI', text: 'Nicaragua'},
+                    //{ id: 'NE', text: 'Niger'},
+                    { id: 'NG', text: 'Nigeria'},
+                    //{ id: 'NU', text: 'Niue'},
+                    //{ id: 'NF', text: 'Norfolk Island'},
+                    //{ id: 'MP', text: 'Northern Mariana Islands'},
+                    { id: 'NO', text: 'Norway'},
+                    //{ id: 'OM', text: 'Oman'},
+                    { id: 'PK', text: 'Pakistan'},
+                    //{ id: 'PW', text: 'Palau'},
+                    //{ id: 'PS', text: 'Palestinian Territory}, Occupied'},
+                    { id: 'PA', text: 'Panama '},
+                    { id: 'PG', text: 'Papua New Guinea'},
+                    { id: 'PY', text: 'Paraguay'},
+                    { id: 'PE', text: 'Peru'},
+                    { id: 'PH', text: 'Philippines'},
+                    //{ id: 'PN', text: 'Pitcairn'},
+                    { id: 'PL', text: 'Poland'},
+                    { id: 'PT', text: 'Portugal'},
+                    { id: 'PR', text: 'Puerto Rico'},
+                    //{ id: 'QA', text: 'Qatar'},
+                    //{ id: 'RE', text: 'Reunion'},
+                    { id: 'RO', text: 'Romania'},
+                    { id: 'RU', text: 'Russia'},
+                    //{ id: 'RW', text: 'Rwanda'},
+                    //{ id: 'BL', text: 'Saint Barthelemy'},
+                    //{ id: 'SH', text: 'Saint Helena'},
+                    //{ id: 'KN', text: 'Saint Kitts And Nevis'},
+                    //{ id: 'LC', text: 'Saint Lucia'},
+                    //{ id: 'MF', text: 'Saint Martin'},
+                    //{ id: 'PM', text: 'Saint Pierre And Miquelon'},
+                    //{ id: 'VC', text: 'Saint Vincent And Grenadines'},
+                    //{ id: 'WS', text: 'Samoa'},
+                    //{ id: 'SM', text: 'San Marino'},
+                    //{ id: 'ST', text: 'Sao Tome And Principe'},
+                    { id: 'SA', text: 'Saudi Arabia'},
+                    { id: 'SN', text: 'Senegal'},
+                    { id: 'RS', text: 'Serbia'},
+                    //{ id: 'SC', text: 'Seychelles'},
+                    //{ id: 'SL', text: 'Sierra Leone'},
+                    { id: 'SG', text: 'Singapore'},
+                    { id: 'SK', text: 'Slovakia'},
+                    //{ id: 'SI', text: 'Slovenia'},
+                    //{ id: 'SB', text: 'Solomon Islands'},
+                    { id: 'SO', text: 'Somalia'},
+                    { id: 'ZA', text: 'South Africa'},
+                    //{ id: 'GS', text: 'South Georgia And Sandwich Isl.'},
+                    { id: 'ES', text: 'Spain'},
+                    { id: 'LK', text: 'Sri Lanka'},
+                    { id: 'SD', text: 'Sudan'},
+                    { id: 'SR', text: 'Suriname'},
+                    //{ id: 'SJ', text: 'Svalbard And Jan Mayen'},
+                    //{ id: 'SZ', text: 'Swaziland'},
+                    { id: 'SE', text: 'Sweden'},
+                    //{ id: 'CH', text: 'Switzerland'},
+                    { id: 'SY', text: 'Syria'},
+                    { id: 'TW', text: 'Taiwan'},
+                    { id: 'TJ', text: 'Tajikistan'},
+                    { id: 'TZ', text: 'Tanzania'},
+                    { id: 'TH', text: 'Thailand'},
+                    { id: 'TL', text: 'Timor-Leste'},
+                    //{ id: 'TG', text: 'Togo'},
+                    //{ id: 'TK', text: 'Tokelau'},
+                    //{ id: 'TO', text: 'Tonga'},
+                    //{ id: 'TT', text: 'Trinidad And Tobago'},
+                    { id: 'TN', text: 'Tunisia'},
+                    { id: 'TR', text: 'Turkey'},
+                    { id: 'TM', text: 'Turkmenistan'},
+                    //{ id: 'TC', text: 'Turks And Caicos Islands'},
+                    //{ id: 'TV', text: 'Tuvalu'},
+                    //{ id: 'UG', text: 'Uganda'},
+                    { id: 'UA', text: 'Ukraine'},
+                    { id: 'AE', text: 'United Arab Emirates'},
+                    { id: 'GB', text: 'United Kingdom'},
+                    { id: 'US', text: 'United States'},
+                    //{ id: 'UM', text: 'United States Outlying Islands'},
+                    { id: 'UY', text: 'Uruguay'},
+                    { id: 'UZ', text: 'Uzbekistan'},
+                    //{ id: 'VU', text: 'Vanuatu'},
+                    { id: 'VE', text: 'Venezuela'},
+                    { id: 'VN', text: 'Vietnam'},
+                    //{ id: 'VG', text: 'Virgin Islands}, British'},
+                    //{ id: 'VI', text: 'Virgin Islands}, U.S.'},
+                    //{ id: 'WF', text: 'Wallis And Futuna'},
+                    //{ id: 'EH', text: 'Western Sahara'},
+                    { id: 'YE', text: 'Yemen'},
+                    //{ id: 'ZM', text: 'Zambia'},
+                    { id: 'ZW', text: 'Zimbabwe'}
+                ];
+
+                function formatCountry (country) {
+                    if (!country.id) {
+                        return country.text;
+                    }
+                    var $country = $(
+                        '<span class="flag-icon flag-icon-'+ country.id.toLowerCase() +' flag-icon-squared"></span>' +
+                        '<span class="flag-text">'+ country.text+"</span>"
+
+                    )
+                    return $country;
+                };
+
+                //Assuming you have a select element with name country
+                // e.g. <select name="name"></select>
+                $("[name='country']").select2({
+                    placeholder: "Select a country",
+                    templateResult: formatCountry,
+                    data: isoCountries
+                })
+                //When you select the country this code will run and return selected country.
+                $("[name='country']").on('change', function() {
+                    var data = $('#selectCountryId :selected').text();
+                    console.log("Selected Country : ",data);
+
+                    var selectedCountryName = {
+                        selectedCountryName : data
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: 'getCountryNameFromJquery',//do not put the full url,you need use an absolute url
+                        data: selectedCountryName,//put search js object directly here
+                        success :function(result) {
+                            console.log("Successfuly sent data to the Spring Controller.");
+                            setTimeout(function () {
+                                window.location.reload();
+                            });
+
+                        }
+                    });
+                })
+
+            })
+        })(jQuery);
+
+    </script>
+
+    {{#summaryChosen}}
+    <li name = "summaryChosenValues" style=" list-style: none; display: block; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height: 75px;">
+        <div style="display: table">
+            <div style="display: table-cell; float: left;width: 600px;">
+                <h2 name="cityNameChosen">{{englishName}} / {{country.englishName}}</h2>
+                <div>{{temperature.imperial.value}}<sup>°F</sup> /
+                    {{temperature.metric.value}}<sup>°C</sup> / <b
+                        name="weatherTextChosen">{{weatherText}}</b>
+                </div>
+            </div>
+
+            <div class="mainDivRainyWeatherChosen" style="top: -7px; display: table-cell;position: relative"></div>
+            <div class="mainDivSunnyWeatherChosen" style="top: -7px; display: table-cell;position: relative"></div>
+            <div class="mainDivCloudyWeatherChosen" style="top: -7px;; display: table-cell;position: relative"></div>
+            <div class="mainDivSnowWeatherChosen" style="top: -7px; display: table-cell;position: relative"></div>
+            <div class="mainDivThunderStormChosen" style="top: -7px; display: table-cell;position: relative"></div>
+            <div class="mainDivSunnyCloudyChosen" style="top: -7px; display: table-cell;position: relative"></div>
+        </div>
+        <script>
+            var weatherText = document.getElementsByName('weatherTextChosen')[(document.getElementsByName('summaryChosenValues').length-1)].innerText;
+            var englishName = document.getElementsByName('cityNameChosen')[(document.getElementsByName('summaryChosenValues').length-1)].innerText;
+
+            var thisIsCurrent = 0;
+            var thisIsChosen = 1;
+
+            weatherConditions(weatherText,englishName,thisIsCurrent,thisIsChosen);
+
+        </script>
+
+
+    </li>
+    {{/summaryChosen}}
+
+    {{#summaryCurrent}}
+    <li style=" list-style: none; display: block; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height: 75px;">
+        <div style="display: table">
+            <div style="display: table-cell; float: left;width: 600px;">
+              <h2 id="cityNameCurrent">{{englishName}} / {{country.englishName}} <p1 style="font-size: 0.650em; font-style: italic; opacity: 0.4;">(Your current(or approximate) location)</p1></h2>
+                <div>{{temperature.imperial.value}}<sup>°F</sup> /
+                    {{temperature.metric.value}}<sup>°C</sup> / <b
+                        id="weatherTextCurrent">{{weatherText}}</b>
+                </div>
+            </div>
+
+            <div class="mainDivRainyWeatherCurrent" style="top: -7px; display: table-cell;position: relative"></div>
+            <div class="mainDivSunnyWeatherCurrent" style="top: -7px; display: table-cell;position: relative"></div>
+            <div class="mainDivCloudyWeatherCurrent" style="top: -7px; display: table-cell;position: relative"></div>
+            <div class="mainDivSnowWeatherCurrent" style="top: -7px; display: table-cell;position: relative"></div>
+            <div class="mainDivThunderStormCurrent" style="top: -7px; display: table-cell;position: relative"></div>
+            <div class="mainDivSunnyCloudyCurrent" style="top: -7px; display: table-cell;position: relative"></div>
+        </div>
+        <script>
+
+            var weatherText = document.getElementById('weatherTextCurrent').innerText;
+            var englishName = document.getElementById('cityNameCurrent').innerText;
+            var thisIsCurrent = 1;
+            var thisIsChosen = 0;
+
+            weatherConditions(weatherText,englishName,thisIsCurrent,thisIsChosen);
+
+        </script>
+
+
+    </li>
+    {{/summaryCurrent}}
+
+    {{#summaryLon}}
+    <li style=" list-style: none; display: block; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height: 75px;">
+        <div style="display: table">
+            <div style="display: table-cell; float: left;width: 600px;">
+                <h2 id="cityNameLon">{{englishName}} / {{country.englishName}}</h2>
+                <div>{{temperature.imperial.value}}<sup>°F</sup> /
+                    {{temperature.metric.value}}<sup>°C</sup> / <b
+                            id="weatherTextLon">{{weatherText}}</b>
+                </div>
+            </div>
+            <!--London Weather Divs-->
+            <div class="mainDivRainyWeatherLondon" style="top: 2px ; display: table-cell;position: relative"></div>
+            <div class="mainDivSunnyWeatherLondon" style="top: 2px ; display: table-cell;position: relative"></div>
+            <div class="mainDivCloudyWeatherLondon" style="top: 2px ; display: table-cell;position: relative"></div>
+            <div class="mainDivSnowWeatherLondon" style="top: 2px ;display: table-cell;position: relative"></div>
+            <div class="mainDivThunderStormLondon" style="top: 2px ; display: table-cell;position: relative"></div>
+            <div class="mainDivSunnyCloudyLondon" style="top: 2px ; display: table-cell;position: relative"></div>
+
+        </div>
+        <script>
+
+                var weatherText = document.getElementById('weatherTextLon').innerText;//weatherText Stringi Cloudy olarak döndürmüyor bak
+                var englishName = document.getElementById('cityNameLon').innerText;
+                var thisIsCurrent = 0;
+                var thisIsChosen = 0;
+
+                weatherConditions(weatherText,englishName,thisIsCurrent,thisIsChosen);
+        </script>
+
+    </li>
+    {{/summaryLon}}
+
+    {{#summaryIst}}
+    <li style=" list-style: none; display: block; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height: 75px;">
+        <div style="display: table">
+            
+            <div style="display: table-cell; float: left;width: 600px;">
+                <h3 id="cityNameIst">{{englishName}} / {{country.englishName}}</h3>
+                <div>{{temperature.imperial.value}}<sup>°F</sup> /
+                    {{temperature.metric.value}}<sup>°C</sup> / <b
+                            id="weatherTextIst">{{weatherText}}</b>
+                </div>
+            </div>
+            <!--Istanbul Weather Divs-->
+            <div class="mainDivRainyWeatherIstanbul" style="top: -6px ; display: table-cell;position: relative"></div>
+            <div class="mainDivSunnyWeatherIstanbul" style="top: -6px ; display: table-cell;position: relative"></div>
+            <div class="mainDivCloudyWeatherIstanbul" style="top: -6px ; display: table-cell;position: relative"></div>
+            <div class="mainDivSnowWeatherIstanbul" style="top: -6px ; display: table-cell;position: relative"></div>
+            <div class="mainDivThunderStormIstanbul" style="top: -6px ; display: table-cell;position: relative"></div>
+            <div class="mainDivSunnyCloudyIstanbul" style="top: -6px ; display: table-cell;position: relative"></div>
+
+        </div>
+
+        <script>
+
+            var weatherText = document.getElementById('weatherTextIst').innerText;
+            var englishName = document.getElementById('cityNameIst').innerText;
+            var thisIsCurrent = 0;
+            var thisIsChosen = 0;
+
+            weatherConditions(weatherText,englishName,thisIsCurrent,thisIsChosen);
+
+        </script>
+    </li>
+    {{/summaryIst}}
+
+    {{#summaryMscw}}
+    <li style=" list-style: none; display: block; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height: 75px;">
+        <div style="display: table">
+            <div style="display: table-cell; float: left;width: 600px;">
+                <h4 id="cityNameMscw">{{englishName}} / {{country.englishName}}</h4>
+                <div>{{temperature.imperial.value}}<sup>°F</sup> /
+                    {{temperature.metric.value}}<sup>°C</sup> / <b
+                            id="weatherTextMosw">{{weatherText}}</b>
+                </div>
+
+            </div>
+            <!--Moscow Weather Divs-->
+            <div class="mainDivRainyWeatherMoscow" style="top: -9px ; ; display: table-cell;position: relative"></div>
+            <div class="mainDivSunnyWeatherMoscow" style="top: -9px ; display: table-cell;position: relative"></div>
+            <div class="mainDivCloudyWeatherMoscow" style="top: -9px ; display: table-cell;position: relative"></div>
+            <div class="mainDivSnowWeatherMoscow" style="top: -9px ; display: table-cell;position: relative"></div>
+            <div class="mainDivThunderStormMoscow" style="top: -9px ; display: table-cell;position: relative"></div>
+            <div class="mainDivSunnyCloudyMoscow" style="top: -9px ; display: table-cell;position: relative"></div>
+        </div>
+        <script>
+
+            var weatherText = document.getElementById('weatherTextMosw').innerText;//weatherText Stringi Cloudy olarak döndürmüyor bak
+            var englishName = document.getElementById('cityNameMscw').innerText;
+            var thisIsCurrent = 0;
+            var thisIsChosen = 0;
+
+            weatherConditions(weatherText,englishName,thisIsCurrent,thisIsChosen);
+
+        </script>
+    </li>
+    {{/summaryMscw}}
+
+    {{#summaryNY}}
+    <li style=" list-style: none; display: block; background-color: rgba(255, 255, 255, .8); padding: 20px; margin: 20px; column-count: 1; height: 75px;">
+        <div style="display: table">
+            <div style="display: table-cell; float: left;width: 600px;">
+                <h5 id="cityNameNy">{{englishName}} / {{country.englishName}}</h5>
+                <div>{{temperature.imperial.value}}<sup>°F</sup> /
+                    {{temperature.metric.value}}<sup>°C</sup> / <b
+                            id="weatherTextNy">{{weatherText}}</b>
+                </div>
+            </div>
+            <!--New York Weather Divs-->
+            <div class="mainDivRainyWeatherNewYork" style="top:-8px; display: table-cell;position: initial"></div>
+            <div class="mainDivSunnyWeatherNewYork" style="top:-8px; display: table-cell;position: initial"></div>
+            <div class="mainDivCloudyWeatherNewYork" style="top:-8px; display: table-cell;position: initial"></div>
+            <div class="mainDivSnowWeatherNewYork" style="top:-8px; display: table-cell;position: initial"></div>
+            <div class="mainDivThunderStormNewYork" style="top:-8px; display: table-cell;position: initial"></div>
+            <div class="mainDivSunnyCloudyNewYork" style="top:-8px; display: table-cell;position: initial"></div>
+        </div>
+        <script>
+
+            var weatherText = document.getElementById('weatherTextNy').innerText;
+            var englishName = document.getElementById('cityNameNy').innerText;
+            var thisIsCurrent = 0;
+            var thisIsChosen = 0;
+
+            weatherConditions(weatherText,englishName,thisIsCurrent,thisIsChosen);
+
+
+        </script>
+    </li>
+    {{/summaryNY}}
+
+    <p>developed by
+        <mark class="red"><i>Ufuk Atakan Yüksel</i></mark>
+    </p>
+</ul>
+
+
+</body>
+</html>
+
+
