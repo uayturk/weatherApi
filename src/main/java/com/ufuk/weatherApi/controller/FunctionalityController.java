@@ -27,6 +27,19 @@ public class FunctionalityController {
     this.functionalityHandler = functionalityHandler;
   }
 
+ /* *//**
+   * Check {@link FunctionalityHandler}.
+   *//*
+  @RequestMapping(value = "/jsonReadAndSaveDb", method = {RequestMethod.POST}, produces = "application/json")
+  @ResponseBody
+  @ApiOperation(value = "Necessary doc is the below for jsonReadAndSaveDb.\n",
+      notes = "jsonReadAndSaveDb is read Json object values from url and then saves values to MongoDb.\n "
+  )
+  public void jsonReadAndSaveDb(@RequestParam String apiKey, @RequestParam(required = false) String language, @RequestParam(required = false) boolean details) throws IOException, JSONException {
+    functionalityHandler.jsonReadAndSaveDb(apiKey, language, details);
+  }*/
+
+
   /**
    * Check {@link FunctionalityHandler}.
    */
@@ -35,9 +48,10 @@ public class FunctionalityController {
   @ApiOperation(value = "Necessary doc is the below for jsonReadAndSaveDb.\n",
       notes = "jsonReadAndSaveDb is read Json object values from url and then saves values to MongoDb.\n "
   )
-  public void jsonReadAndSaveDb(@RequestParam String apiKey, @RequestParam(required = false) String language, @RequestParam(required = false) boolean details) throws IOException, JSONException {
-    functionalityHandler.jsonReadAndSaveDb(apiKey, language, details);
+  public void jsonReadAndSaveDb() throws IOException, JSONException {
+    functionalityHandler.jsonReadAndSaveDb();
   }
+
 
   /**
    * @param key key for get specific data from mondoDB.

@@ -18,8 +18,8 @@ public interface FunctionalityHandler {
     /**
      * Reads json values from url and saves MongoDb.
      */
-    void jsonReadAndSaveDb(String apiKey, String language, boolean details) throws IOException, JSONException;
-
+    void jsonReadAndSaveDb() throws IOException, JSONException;
+    //void jsonReadAndSaveDb(String apiKey, String language, boolean details) throws IOException, JSONException;
     /**
      * @param key key to return weatherApi objects below it.
      * @return returns a list of {@link BaseObject}

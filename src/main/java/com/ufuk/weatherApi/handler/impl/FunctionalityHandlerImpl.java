@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 
@@ -36,11 +37,15 @@ class FunctionalityHandlerImpl implements FunctionalityHandler {
    * EmZIJo7SS05EHTF2qiQa5aABmJqtG9gs 1.apikey(kullanıma acik)
    * url : http://dataservice.accuweather.com/currentconditions/v1/topcities/50?apikey="+apiKey+"&language=en&details=true&format=json
    **/
-  @Override
-  public void jsonReadAndSaveDb(String apiKey, String language, boolean details) throws IOException {
+  //public void jsonReadAndSaveDb(String apiKey, String language, boolean details) throws IOException
+
+  //@Override
+  @Scheduled(fixedRate = 1000*60*30)
+  public void jsonReadAndSaveDb() throws IOException {
     //String apiKey ="EmZIJo7SS05EHTF2qiQa5aABmJqtG9gs";
 
-    String url = "http://dataservice.accuweather.com/currentconditions/v1/topcities/150?apikey="+apiKey+"&language=en&details=true&ormat=json";
+    //String url = "http://dataservice.accuweather.com/currentconditions/v1/topcities/150?apikey="+apiKey+"&language=en&details=true&ormat=json";
+    String url = "http://dataservice.accuweather.com/currentconditions/v1/topcities/150?apikey=EmZIJo7SS05EHTF2qiQa5aABmJqtG9gs&language=en&details=true&ormat=json";
     URL obj = new URL(url);
     HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
