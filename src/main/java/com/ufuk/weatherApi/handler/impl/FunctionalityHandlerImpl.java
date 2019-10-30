@@ -188,7 +188,6 @@ class FunctionalityHandlerImpl implements FunctionalityHandler {
 
   }
 
-
   /**
    * fourBiggestCityForFirstLook is loads weather values for 4 biggest city in front end's first opening view.
    * @param englishName valid city name.
@@ -211,7 +210,6 @@ class FunctionalityHandlerImpl implements FunctionalityHandler {
 
   }
 
-
   /**
    * getChosenCountryWeather returns weather values for chosen country.
    * @param country valid country name.
@@ -230,7 +228,6 @@ class FunctionalityHandlerImpl implements FunctionalityHandler {
     log.info("FINALLY RESULT CHOSEN COUNTRY: {}", result);
     return result;
   }
-
 
   /**
    * getCurrentCountryWeather returns current country weather conditions.
