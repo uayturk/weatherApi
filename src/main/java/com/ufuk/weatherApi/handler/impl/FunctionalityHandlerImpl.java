@@ -155,6 +155,11 @@ class FunctionalityHandlerImpl implements FunctionalityHandler {
 
   }
 
+  /**
+   * loadValuesFromMongoDb loads weather values with using key.
+   * @param key key to return weatherApi objects below it.
+   * @return valid results.
+   */
   public  List<BaseObject> loadValuesFromMongoDb(String key){
     log.info("trying to load weather values from key : {}",key);
 
@@ -182,6 +187,11 @@ class FunctionalityHandlerImpl implements FunctionalityHandler {
 
   }
 
+  /**
+   * fourBiggestCityForFirstLook is loads weather values for 4 biggest city in front end's first opening view.
+   * @param englishName valid city name.
+   * @return valid results.
+   */
   public List<BaseObject> fourBiggestCityForFirstLook(String englishName){
     log.info("trying to load weather values for 4 biggest city in front end's first opening view .");
 
@@ -199,6 +209,11 @@ class FunctionalityHandlerImpl implements FunctionalityHandler {
 
   }
 
+  /**
+   * getChosenCountryWeather returns weather values for chosen country.
+   * @param country valid country name.
+   * @return valid results.
+   */
   public List<BaseObject> getChosenCountryWeather(String country){
     log.info("trying to get weather values for CURRENT country in front end's first opening view {}.",country);
     Query query = new Query(where("country.englishName").is(country));
@@ -213,7 +228,12 @@ class FunctionalityHandlerImpl implements FunctionalityHandler {
     return result;
   }
 
-
+  /**
+   * getCurrentCountryWeather returns current country weather conditions.
+   * @param country valid country name.
+   * @param city valid city name.
+   * @return valid results.
+   */
   public List<BaseObject> getCurrentCountryWeather(String country,String city){
     log.info("trying to get weather values for CURRENT country in front end's first opening view .",country);
 
