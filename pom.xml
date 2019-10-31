@@ -102,7 +102,8 @@
       <artifactId>spring-boot-configuration-processor</artifactId>
       <optional>true</optional>
     </dependency>
-
+    <!-- End of support MongoDB (3.6) -->
+    <!--Dependencies for springframework-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -114,10 +115,6 @@
       <scope>test</scope>
     </dependency>
     <!--End of the dependencies for springframework-->
-
-    <!-- https://mvnrepository.com/artifact/org.json/json -->
-
-    <!-- https://mvnrepository.com/artifact/org.json/json -->
 
     <dependency>
       <groupId>commons-codec</groupId>
