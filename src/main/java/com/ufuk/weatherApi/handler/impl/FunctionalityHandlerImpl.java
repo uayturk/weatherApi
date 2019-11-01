@@ -69,6 +69,24 @@ class FunctionalityHandlerImpl implements FunctionalityHandler {
     in.close();
 
     /**
+     * In here JSON formant comes like:
+     *  [
+     *   {
+     *      "Key": "28143",
+     *      "LocalizedName": "Dhaka",
+     *      .
+     *      .
+     *   },
+     *   {
+     *      "Key": "113487",
+     *      "LocalizedName": "Kinshasa",
+     *      .
+     *      .
+     *   }
+     *  ]
+     */
+
+    /**
      * This is the professional way of setting fields and saving datas to MongoDb. Gson is the our hero here.
      * Our datas coming from AccuWeather API's as a JSON type. For now List do not support to using like List<BaseObject>.
      * Therefore we are using it with Object type.( List<Object> ) . We are taking the List in Object type.
