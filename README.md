@@ -19,6 +19,11 @@ If you wanna change default configuration,parameters set in src/main/resources/a
 
 <br/>By default this assesment will be executed on 8080 port and you'll see the entire endpoints from http://localhost:8080/swagger-ui.html
 
+***Front-End***
+
+<br/>You also can check our the Api from below url:
+http://localhost:8080/weatherApi/weatherApi
+
 ***IDE***
 
 <br/>For this service we used smart IDE intellij and you can easily start our spring boot application from ```src/main/java/com.ufuk.weatherApi/WeatherApiApplication``` class.
