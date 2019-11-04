@@ -48,7 +48,7 @@ public class SummaryController {
     JSONObject obj = new JSONObject(json);
     //Converting string because getCurrentCountryWeather takes string.
     String currentCountryName = obj.getString("country_name").replaceAll("\"", "").trim().toString();
-
+    //city can be null. Thats why we are doing null check here.
     String currentCityName;
     if(obj.isNull("city")){
       currentCityName = null;
