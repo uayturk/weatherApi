@@ -57,7 +57,7 @@ class FunctionalityHandlerImpl implements FunctionalityHandler {
 
 
 
-/*    FileReader fr = new FileReader("/home/ufuk/Masaüstü/weatherApiJsonDatas3");
+    /*FileReader fr = new FileReader("/home/atakan/Masaüstü/weatherApiJsonDatas3");
     BufferedReader in = new BufferedReader(fr);*/
 
 

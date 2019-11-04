@@ -39,6 +39,7 @@ public class SummaryController {
 
 
   @RequestMapping(value = "/weatherApi", method = RequestMethod.GET)
+
   /*@Scope(value = "session")*/
   public String summary(ModelMap modelMap) throws IOException {
     //This code takes current country from url
@@ -47,7 +48,13 @@ public class SummaryController {
     JSONObject obj = new JSONObject(json);
     //Converting string because getCurrentCountryWeather takes string.
     String currentCountryName = obj.getString("country_name").replaceAll("\"", "").trim().toString();
-    String currentCityName = obj.getString("city").replaceAll("\"", "").trim().toString();
+
+    String currentCityName;
+    if(obj.isNull("city")){
+      currentCityName = null;
+    }else {
+      currentCityName = obj.getString("city").replaceAll("\"", "").trim().toString();
+    }
 
     modelMap.addAttribute("summaryChosen", functionalityHandler.getChosenCountryWeather(chosenCountryName.getChosenCountryName())); // getCurrentCountryWeather method can use for chosen country too.
 
