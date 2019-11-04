@@ -179,7 +179,7 @@ class FunctionalityHandlerImpl implements FunctionalityHandler {
    * @param key key to return weatherApi objects below it.
    * @return valid results.
    */
-  public  List<BaseObject> loadValuesFromMongoDb(String key){
+  public List<BaseObject> loadValuesFromMongoDb(String key){
     log.info("trying to load weather values from key : {}",key);
 
     Query query = new Query(where("key").is(key));
