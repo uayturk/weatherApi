@@ -113,6 +113,9 @@ class FunctionalityHandlerImpl implements FunctionalityHandler {
      * As you see,it has not good look too.
      */
 
+
+
+
    /* BaseObject object = new BaseObject();
     JSONArray myResponse = new JSONArray(response.toString());
     for(int i=0 ; i< myResponse.length() ; i++){
