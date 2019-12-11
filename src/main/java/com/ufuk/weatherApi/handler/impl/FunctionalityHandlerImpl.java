@@ -82,7 +82,13 @@ class FunctionalityHandlerImpl implements FunctionalityHandler {
      *      "LocalizedName": "Kinshasa",
      *      .
      *      .
-     *   }
+     *   },
+     *        *   {
+     *      *      "Key": "234563",
+     *      *      "LocalizedName": "Aruba",
+     *      *      .
+     *      *      .
+     *      *   }
      *  ]
      */
 
