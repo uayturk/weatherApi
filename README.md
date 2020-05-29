@@ -1,7 +1,7 @@
 
 ***ASSESMENT***
 
-<br/>WeatherApi RESTful service with embedded apache tomcat as servlet container.Used Spring Boot as framework,MongoDb as Database,Jsp,Jquery and Css as Frontend.
+<br/> WeatherApi is the RESTful service Api with embedded apache tomcat as servlet container. It use Java / Spring Boot as Back-End, Jquery, Jsp as Front-End, MongoDB as Database. It use accuweather's dataservice which is an api that returns information of 150 biggest cities weather condition around the world as JSON. WeatherApi gets JSON and save to the MongoDB. In addition, WeatherApi determines your location as an extra feature from your ip address. Accordingly, if your city is within 150 cities it take your city, if your city is not within 150 cities,it takes the city which is closest to you and it shows your weather condition top of the front view. WeatherApi shows 4 biggest cities weather condition as default. You can also choose your country and can get all cities conditions of your country.
 
 ***RUN***
 
